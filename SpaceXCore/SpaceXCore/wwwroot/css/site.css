@@ -1,0 +1,35 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+.title {
+    margin-bottom: 50px;
+}
+
+.card-item {
+    margin-right: 50px;
+}
+
+.card-list {
+    display: flex;
+    margin-bottom: 50px;
+}
+
+.card-image {
+    height: 200px;
+    object-fit: cover;
+}

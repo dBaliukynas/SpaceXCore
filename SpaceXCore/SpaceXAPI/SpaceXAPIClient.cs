@@ -1,4 +1,5 @@
-﻿using System.Net.Sockets;
+﻿using System;
+using System.Net.Sockets;
 using System.Text.Json;
 using SpaceXAPI.Entities;
 
@@ -13,32 +14,24 @@ namespace SpaceXAPI
             PropertyNameCaseInsensitive = true
         };
 
-        public static async Task Test()
+        public static async Task<List<LaunchEntity>> GetLaunches()
         {
-            using HttpResponseMessage response = await client.GetAsync("https://api.spacexdata.com/v5/launches/latest");
-            response.EnsureSuccessStatusCode();
+            string responseBody = await client.GetStringAsync("https://api.spacexdata.com/v5/launches");
 
-            string responseBody = await response.Content.ReadAsStringAsync();
+            Console.WriteLine(responseBody);
 
-            using HttpResponseMessage response2 = await client.GetAsync("https://api.spacexdata.com/v5/launches");
-            response2.EnsureSuccessStatusCode();
+            return JsonSerializer.Deserialize<List<LaunchEntity>>(responseBody, serializerOptions);
+        }
 
-            string responseBody2 = await response2.Content.ReadAsStringAsync();
-
-            // Above three lines can be replaced with new helper method below
-            // string responseBody = await client.GetStringAsync(uri);
-
-
-
+        public static async Task GetLatestLaunches()
+        {
+            string responseBody = await client.GetStringAsync("https://api.spacexdata.com/v5/launches/latest");
         }
 
         public static async Task<List<RocketEntity>> GetRockets()
         {
 
-            using HttpResponseMessage response = await client.GetAsync("https://api.spacexdata.com/v4/rockets");
-            response.EnsureSuccessStatusCode();
-
-            string responseBody = await response.Content.ReadAsStringAsync();
+            string responseBody = await  client.GetStringAsync("https://api.spacexdata.com/v4/rockets");
 
             return JsonSerializer.Deserialize<List<RocketEntity>>(responseBody, serializerOptions);
         }

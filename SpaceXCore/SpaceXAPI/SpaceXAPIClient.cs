@@ -18,14 +18,14 @@ namespace SpaceXAPI
         {
             string responseBody = await client.GetStringAsync("https://api.spacexdata.com/v5/launches");
 
-            Console.WriteLine(responseBody);
-
             return JsonSerializer.Deserialize<List<LaunchEntity>>(responseBody, serializerOptions);
         }
 
-        public static async Task GetLatestLaunches()
+        public static async Task<LaunchEntity> GetLatestLaunches()
         {
             string responseBody = await client.GetStringAsync("https://api.spacexdata.com/v5/launches/latest");
+
+            return JsonSerializer.Deserialize<LaunchEntity>(responseBody, serializerOptions); ;
         }
 
         public static async Task<List<RocketEntity>> GetRockets()
@@ -34,6 +34,14 @@ namespace SpaceXAPI
             string responseBody = await  client.GetStringAsync("https://api.spacexdata.com/v4/rockets");
 
             return JsonSerializer.Deserialize<List<RocketEntity>>(responseBody, serializerOptions);
+        }
+
+        public static async Task<RocketEntity> GetRocket(string id)
+        {
+
+            string responseBody = await client.GetStringAsync($"https://api.spacexdata.com/v4/rockets/{id}");
+
+            return JsonSerializer.Deserialize<RocketEntity>(responseBody, serializerOptions);
         }
     }
 }

@@ -24,7 +24,7 @@ body {
 .title {
     margin-bottom: 50px;
 }
-.title-2 {
+.mb-20 {
     margin-bottom: 20px;
 }
 
@@ -52,9 +52,12 @@ body {
     max-height: 360px;
     object-fit: contain;
 }
-.medium-sized-image-container
-{
+.medium-sized-image-container {
     margin-bottom: 50px;
+    display: block;
+    background-color: #e3e3e3;
+    color: black;
+    text-decoration: none;
 }
 .image-low-brightness {
     filter: brightness(30%);
@@ -69,6 +72,7 @@ body {
     text-align: center;
     color: white;
     margin-bottom: 50px;
+    background-color: #343434;
 }
 
 .image-text-center {
@@ -84,6 +88,16 @@ body {
 .list-group {
     width: 50rem;
     text-align: start;
+}
+.image-contain {
+    object-fit: contain;
+}
+
+.truncate-7 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 7;
+    -webkit-box-orient: vertical;
 }
 
 

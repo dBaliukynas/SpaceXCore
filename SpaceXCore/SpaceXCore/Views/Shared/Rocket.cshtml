@@ -5,20 +5,18 @@
 
 <div class="text-center">
   
-    <div class="image-text-container">
-        <img src="@ViewBag.rocket.Images[0]" class="image-low-brightness" />
-        <h1 class="display-4 title-2 image-text-center">@ViewBag.rocket.Name</h1>
-    </div>
+    <vc:top-image-container image=@ViewBag.rocket.Images[0] name=@ViewBag.rocket.Name></vc:top-image-container>
     <div class="list-group-container">
     <ul class="list-group">
         <li class="list-group-item"><strong>Name</strong>: @ViewBag.rocket.Name</li>
         <li class="list-group-item"><strong>Description</strong>: @ViewBag.rocket.Description</li>
-        <li class="list-group-item"><strong>Height</strong>: @ViewBag.rocket.Height</li>
-        <li class="list-group-item"><strong>Diameter</strong>: @ViewBag.rocket.Diameter</li>
-        <li class="list-group-item"><strong>Mass</strong>: @ViewBag.rocket.Mass</li>
-        <li class="list-group-item"><strong>Cost per launch</strong>: @ViewBag.rocket.Cost$</li>
+        <li class="list-group-item"><strong>Height</strong>: @(ViewBag.rocket.Height)m </li>
+        <li class="list-group-item"><strong>Diameter</strong>: @(ViewBag.rocket.Diameter)m</li>
+        <li class="list-group-item"><strong>Mass</strong>: @(ViewBag.rocket.Mass)kg</li>
+        <li class="list-group-item"><strong>Cost per launch</strong>: @(ViewBag.rocket.Cost)$</li>
     </ul>
     </div>
+
   
 
 </div>

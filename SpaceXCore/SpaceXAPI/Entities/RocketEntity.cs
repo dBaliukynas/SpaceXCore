@@ -73,7 +73,7 @@ namespace SpaceXAPI.Entities
         public Uri Wikipedia { get; set; }
     }
 
-        public partial class Diameter
+        public class Diameter
         {
             [JsonPropertyName("meters")]
             public double? Meters { get; set; }
@@ -82,7 +82,7 @@ namespace SpaceXAPI.Entities
             public double? Feet { get; set; }
         }
 
-        public partial class Engines
+        public class Engines
         {
             [JsonPropertyName("isp")]
             public Isp Isp { get; set; }
@@ -118,7 +118,7 @@ namespace SpaceXAPI.Entities
             public double ThrustToWeight { get; set; }
         }
 
-        public partial class Isp
+        public class Isp
         {
             [JsonPropertyName("sea_level")]
             public long SeaLevel { get; set; }
@@ -127,7 +127,7 @@ namespace SpaceXAPI.Entities
             public long Vacuum { get; set; }
         }
 
-        public partial class Thrust
+        public class Thrust
         {
             [JsonPropertyName("kN")]
             public long KN { get; set; }
@@ -136,7 +136,7 @@ namespace SpaceXAPI.Entities
             public long Lbf { get; set; }
         }
 
-        public partial class FirstStage
+        public class FirstStage
         {
             [JsonPropertyName("thrust_sea_level")]
             public Thrust ThrustSeaLevel { get; set; }
@@ -157,7 +157,7 @@ namespace SpaceXAPI.Entities
             public double? BurnTimeSec { get; set; }
         }
 
-        public partial class LandingLegs
+        public class LandingLegs
         {
             [JsonPropertyName("number")]
             public long Number { get; set; }
@@ -166,7 +166,7 @@ namespace SpaceXAPI.Entities
             public string Material { get; set; }
         }
 
-        public partial class Mass
+        public class Mass
         {
             [JsonPropertyName("kg")]
             public long Kg { get; set; }
@@ -175,7 +175,7 @@ namespace SpaceXAPI.Entities
             public long Lb { get; set; }
         }
 
-        public partial class PayloadWeight
+        public class PayloadWeight
         {
             [JsonPropertyName("id")]
             public string Id { get; set; }
@@ -190,7 +190,7 @@ namespace SpaceXAPI.Entities
             public long Lb { get; set; }
         }
 
-        public partial class SecondStage
+        public class SecondStage
         {
             [JsonPropertyName("thrust")]
             public Thrust Thrust { get; set; }
@@ -211,7 +211,7 @@ namespace SpaceXAPI.Entities
             public double? BurnTimeSec { get; set; }
         }
 
-        public partial class Payloads
+        public class Payloads
         {
             [JsonPropertyName("composite_fairing")]
             public CompositeFairing CompositeFairing { get; set; }
@@ -220,7 +220,7 @@ namespace SpaceXAPI.Entities
             public string Option1 { get; set; }
         }
 
-        public partial class CompositeFairing
+        public class CompositeFairing
         {
             [JsonPropertyName("height")]
             public Diameter Height { get; set; }

@@ -21,7 +21,15 @@ namespace SpaceXAPI
             return JsonSerializer.Deserialize<List<LaunchEntity>>(responseBody, serializerOptions);
         }
 
-        public static async Task<LaunchEntity> GetLatestLaunches()
+        public static async Task<LaunchEntity> GetLaunch(string id)
+        {
+            string responseBody = await client.GetStringAsync($"https://api.spacexdata.com/v5/launches/{id}");
+            Console.WriteLine(responseBody);
+
+            return JsonSerializer.Deserialize<LaunchEntity>(responseBody, serializerOptions);
+        }
+
+        public static async Task<LaunchEntity> GetLatestLaunch()
         {
             string responseBody = await client.GetStringAsync("https://api.spacexdata.com/v5/launches/latest");
 

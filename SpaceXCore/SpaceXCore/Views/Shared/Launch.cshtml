@@ -1,0 +1,18 @@
+﻿@{
+    ViewData["Title"] = "Launch";
+}
+
+
+<div class="text-center">
+
+    <vc:top-image-container image=@ViewBag.launch.Image name=@ViewBag.launch.Name contain-image=true></vc:top-image-container>
+    <div class="list-group-container">
+    <ul class="list-group">
+        <li class="list-group-item"><strong>Name</strong>: @ViewBag.launch.Name</li>
+        <li class="list-group-item"><strong>Description</strong>: @ViewBag.launch.Details</li>
+    </ul>
+    </div>
+
+
+
+</div>

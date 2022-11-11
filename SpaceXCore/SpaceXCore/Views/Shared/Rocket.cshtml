@@ -14,6 +14,16 @@
         <li class="list-group-item"><strong>Diameter</strong>: @(ViewBag.rocket.Diameter)m</li>
         <li class="list-group-item"><strong>Mass</strong>: @(ViewBag.rocket.Mass)kg</li>
         <li class="list-group-item"><strong>Cost per launch</strong>: @(ViewBag.rocket.Cost)$</li>
+        <li class="list-group-item"><strong>Stages</strong>: @ViewBag.rocket.Stages</li>
+        <li class="list-group-item"><strong>Boosters</strong>: @ViewBag.rocket.Boosters</li>
+        <li class="list-group-item"><strong>First flight</strong>: @ViewBag.rocket.FirstFlight</li>
+        <li class="list-group-item list-group-header">First Stage</li>
+        <li class="list-group-item list-group-item-level-2"><strong>Thrust of Sea Level engines</strong>: @(ViewBag.rocket.ThrustSeaLevelFS)kN</li>
+        <li class="list-group-item list-group-item-level-2"><strong>Thrust of Vacuum engines</strong>: @(ViewBag.rocket.ThrustVacuumFS)kN</li>
+        <li class="list-group-item list-group-item-level-2"><strong>Reusable</strong>: @(ViewBag.rocket.ReusableFS ? "Yes" : "No")</li>
+        <li class="list-group-item list-group-header">Second Stage</li>
+        <li class="list-group-item list-group-item-level-2"><strong>Thrust</strong>: @(ViewBag.rocket.ThrustSS)kN</li>
+        <li class="list-group-item list-group-item-level-2"><strong>Reusable</strong>: @(ViewBag.rocket.ReusableSS ? "Yes" : "No")</li>
     </ul>
     </div>
 

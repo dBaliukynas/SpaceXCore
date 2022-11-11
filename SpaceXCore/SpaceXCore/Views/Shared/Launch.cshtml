@@ -10,6 +10,8 @@
     <ul class="list-group">
         <li class="list-group-item"><strong>Name</strong>: @ViewBag.launch.Name</li>
         <li class="list-group-item"><strong>Description</strong>: @ViewBag.launch.Details</li>
+        <li class="list-group-item"><strong>Rocket</strong>: <a href="/rocket/@ViewBag.launch.Rocket.Id">@ViewBag.launch.Rocket.Name</a></li>
+        <li class="list-group-item"><strong>Succeeded</strong>: @(ViewBag.launch.Success ? "Yes" : "No")</li>
     </ul>
     </div>
 

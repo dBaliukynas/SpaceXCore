@@ -13,6 +13,14 @@ namespace SpaceXCore.Models
             Diameter = rocketEntity.Diameter.Meters.GetValueOrDefault();
             Mass = rocketEntity.Mass.Kg;
             Cost = rocketEntity.CostPerLaunch;
+            ReusableFS = rocketEntity.FirstStage.Reusable;
+            ThrustSeaLevelFS = rocketEntity.FirstStage.ThrustSeaLevel.KN;
+            ThrustVacuumFS = rocketEntity.FirstStage.ThrustVacuum.KN;
+            ReusableSS = rocketEntity.SecondStage.Reusable;
+            ThrustSS = rocketEntity.SecondStage.Thrust.KN;
+            Stages = rocketEntity.Stages;
+            Boosters = rocketEntity.Boosters;
+            FirstFlight = rocketEntity.FirstFlight.Date.ToString("yyyy-MM-dd");
             Description = rocketEntity.Description;
             Images = rocketEntity.Images;
             Id = rocketEntity.Id;
@@ -30,6 +38,14 @@ namespace SpaceXCore.Models
         public string Id { get; set; }
         public double Diameter { get; set; }
         public long Mass { get; set; }
-        public long  Cost { get; set; }
+        public long Cost { get; set; }
+        public bool ReusableFS { get; set; }
+        public long ThrustSeaLevelFS { get; set; }
+        public long ThrustVacuumFS { get; set; }
+        public bool ReusableSS { get; set; }
+        public long ThrustSS { get; set; }
+        public int Stages { get; set; }
+        public int Boosters { get; set; }
+        public string FirstFlight { get; set; }
     }
 }

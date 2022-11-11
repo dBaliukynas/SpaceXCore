@@ -81,17 +81,17 @@ namespace SpaceXAPI.Entities
         public bool Upcoming { get; set; }
 
         [JsonPropertyName("cores")]
-        public Core[] Cores { get; set; }
+        public CoreEntity[] Cores { get; set; }
 
         [JsonPropertyName("id")]
         public string Id { get; set; }
 
     }
 
-    public class Core
+    public class CoreEntity
     {
         [JsonPropertyName("core")]
-        public string CoreCore { get; set; }
+        public string Core { get; set; }
 
         [JsonPropertyName("flight")]
         public long? Flight { get; set; }

@@ -12,6 +12,8 @@ namespace SpaceXCore.Controllers
             var responseLaunch = await SpaceXAPIClient.GetLaunch(id);
             var launch = new LaunchModel(responseLaunch);
 
+            launch.Rocket = new RocketModel(await SpaceXAPIClient.GetRocket(launch.RocketId));
+
             ViewBag.launch = launch;
 
             return View("Launch");

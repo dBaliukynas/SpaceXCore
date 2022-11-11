@@ -33,7 +33,7 @@ namespace SpaceXAPI.Entities
         public SecondStage SecondStage { get; set; }
 
         [JsonPropertyName("engines")]
-        public Engines Engines { get; set; }
+        public Engine Engines { get; set; }
 
         [JsonPropertyName("landing_legs")]
         public LandingLegs LandingLegs { get; set; }
@@ -49,10 +49,10 @@ namespace SpaceXAPI.Entities
         public bool Active { get; set; }
 
         [JsonPropertyName("stages")]
-        public long Stages { get; set; }
+        public int Stages { get; set; }
 
         [JsonPropertyName("boosters")]
-        public long Boosters { get; set; }
+        public int Boosters { get; set; }
 
         [JsonPropertyName("cost_per_launch")]
         public long CostPerLaunch { get; set; }
@@ -61,7 +61,7 @@ namespace SpaceXAPI.Entities
         public long SuccessRatePct { get; set; }
 
         [JsonPropertyName("first_flight")]
-        public DateTimeOffset FirstFlight { get; set; }
+        public DateTime FirstFlight { get; set; }
 
         [JsonPropertyName("country")]
         public string Country { get; set; }
@@ -82,7 +82,7 @@ namespace SpaceXAPI.Entities
             public double? Feet { get; set; }
         }
 
-        public class Engines
+        public class Engine
         {
             [JsonPropertyName("isp")]
             public Isp Isp { get; set; }
@@ -196,7 +196,7 @@ namespace SpaceXAPI.Entities
             public Thrust Thrust { get; set; }
 
             [JsonPropertyName("payloads")]
-            public Payloads Payloads { get; set; }
+            public Payload Payloads { get; set; }
 
             [JsonPropertyName("reusable")]
             public bool Reusable { get; set; }
@@ -211,7 +211,7 @@ namespace SpaceXAPI.Entities
             public double? BurnTimeSec { get; set; }
         }
 
-        public class Payloads
+        public class Payload
         {
             [JsonPropertyName("composite_fairing")]
             public CompositeFairing CompositeFairing { get; set; }

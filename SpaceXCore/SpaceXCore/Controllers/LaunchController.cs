@@ -9,10 +9,12 @@ namespace SpaceXCore.Controllers
         [Route("Launch/{id}")]
         public async Task<IActionResult> Index(string id)
         {
-            var responseLaunch = await SpaceXAPIClient.GetLaunch(id);
+            SpaceXAPIClient client = new SpaceXAPIClient(new HttpClient());
+
+            var responseLaunch = await client.GetLaunch(id);
             var launch = new LaunchModel(responseLaunch);
 
-            launch.Rocket = new RocketModel(await SpaceXAPIClient.GetRocket(launch.RocketId));
+            launch.Rocket = new RocketModel(await client.GetRocket(launch.RocketId));
 
             ViewBag.launch = launch;
 

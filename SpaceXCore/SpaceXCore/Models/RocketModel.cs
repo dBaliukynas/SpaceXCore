@@ -20,7 +20,7 @@ namespace SpaceXCore.Models
             ThrustSS = rocketEntity.SecondStage.Thrust.KN;
             Stages = rocketEntity.Stages;
             Boosters = rocketEntity.Boosters;
-            FirstFlight = rocketEntity.FirstFlight.Date.ToString("yyyy-MM-dd");
+            FirstFlight = rocketEntity.FirstFlight.ToString("yyyy-MM-dd");
             Description = rocketEntity.Description;
             Images = rocketEntity.Images;
             Id = rocketEntity.Id;

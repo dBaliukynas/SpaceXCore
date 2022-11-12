@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpaceXCore", "SpaceXCore\Sp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpaceXAPI", "SpaceXAPI\SpaceXAPI.csproj", "{DE22DED0-9FD9-4EED-9330-6D20B4BA27B5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpaceXAPI.UnitTests", "SpaceXAPI.UnitTests\SpaceXAPI.UnitTests.csproj", "{EAED80A1-AD17-4528-8E4B-122F53CB1D4A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{DE22DED0-9FD9-4EED-9330-6D20B4BA27B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DE22DED0-9FD9-4EED-9330-6D20B4BA27B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DE22DED0-9FD9-4EED-9330-6D20B4BA27B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EAED80A1-AD17-4528-8E4B-122F53CB1D4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EAED80A1-AD17-4528-8E4B-122F53CB1D4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EAED80A1-AD17-4528-8E4B-122F53CB1D4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EAED80A1-AD17-4528-8E4B-122F53CB1D4A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

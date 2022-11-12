@@ -18,9 +18,11 @@ namespace SpaceXCore.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var responseRockets = await SpaceXAPIClient.GetRockets();
-            var responseLatestLaunch = await SpaceXAPIClient.GetLatestLaunch();
-            var responseLaunches = await SpaceXAPIClient.GetLaunches();
+            SpaceXAPIClient client = new SpaceXAPIClient(new HttpClient());
+
+            var responseRockets = await client.GetRockets();
+            var responseLatestLaunch = await client.GetLatestLaunch();
+            var responseLaunches = await client.GetLaunches();
 
             var rockets = responseRockets.Select(rocket => new RocketModel(rocket));
             var latestLaunch = new LaunchModel(responseLatestLaunch);

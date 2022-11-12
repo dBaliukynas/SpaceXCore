@@ -11,6 +11,8 @@ namespace SpaceXCore.Models
             Details = launchEntity.Details;
             Id = launchEntity.Id;
             RocketId = launchEntity.Rocket;
+            StaticFireDate = launchEntity.StaticFireDateUtc?.ToString("yyyy-MM-dd");
+            LaunchDate = launchEntity.DateLocal.ToString("yyyy-MM-dd");
             Success = launchEntity.Success;
             Image = launchEntity.MediaLink.Patch.Large;
         }
@@ -21,6 +23,8 @@ namespace SpaceXCore.Models
         public string RocketId { get; set; }
         public RocketModel Rocket { get; set; }
         public bool? Success { get; set; }
+        public string StaticFireDate { get; set; }
+        public string LaunchDate { get; set; }
 
     }
 }

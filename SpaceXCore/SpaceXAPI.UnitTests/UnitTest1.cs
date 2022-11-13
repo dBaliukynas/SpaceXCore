@@ -8,6 +8,7 @@ namespace SpaceXAPI.UnitTests
 {
     public class SpaceXAPIClientTests
     {
+
         Fixture fixture = new Fixture();
 
         static LaunchEntity launchEntityFixture = new Fixture().Create<LaunchEntity>();
@@ -25,42 +26,23 @@ namespace SpaceXAPI.UnitTests
 
         public class Test : HttpMessageHandler
         {
+            string jsonContent;
+
+            public Test(string content)
+                {
+                    jsonContent = content;
+                }
 
             override protected Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
             {
-                return Task.FromResult(new HttpResponseMessage() { StatusCode = HttpStatusCode.OK, Content = new StringContent(jsonLaunchEntity) });
-            }
-        }
-
-        public class Test2 : HttpMessageHandler
-        {
-
-            override protected Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
-            {
-                return Task.FromResult(new HttpResponseMessage() { StatusCode = HttpStatusCode.OK, Content = new StringContent(jsonRocketEntity) });
-            }
-        }
-        public class Test3 : HttpMessageHandler
-        {
-
-            override protected Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
-            {
-                return Task.FromResult(new HttpResponseMessage() { StatusCode = HttpStatusCode.OK, Content = new StringContent(jsonRocketEntityList) });
-            }
-        }
-        public class Test4 : HttpMessageHandler
-        {
-
-            override protected Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
-            {
-                return Task.FromResult(new HttpResponseMessage() { StatusCode = HttpStatusCode.OK, Content = new StringContent(jsonLaunchEntityList) });
+                return Task.FromResult(new HttpResponseMessage() { StatusCode = HttpStatusCode.OK, Content = new StringContent(jsonContent) });
             }
         }
 
         [Fact]
         public async void TestF()
         {
-            SpaceXAPIClient client = new SpaceXAPIClient(new HttpClient(new Test()));
+            SpaceXAPIClient client = new SpaceXAPIClient(new HttpClient(new Test(jsonLaunchEntity)));
 
             var launchEntity = await client.GetLaunch(launchEntityFixture.Id);
 
@@ -69,7 +51,7 @@ namespace SpaceXAPI.UnitTests
         [Fact]
         public async void TestF2()
         {
-            SpaceXAPIClient client = new SpaceXAPIClient(new HttpClient(new Test2()));
+            SpaceXAPIClient client = new SpaceXAPIClient(new HttpClient(new Test(jsonRocketEntity)));
 
             var rocketEntity = await client.GetRocket(rocketEntityFixture.Id);
 
@@ -78,7 +60,7 @@ namespace SpaceXAPI.UnitTests
         [Fact]
         public async void TestF3()
         {
-            SpaceXAPIClient client = new SpaceXAPIClient(new HttpClient(new Test3()));
+            SpaceXAPIClient client = new SpaceXAPIClient(new HttpClient(new Test(jsonRocketEntityList)));
 
             var rocketEntityList = await client.GetRockets();
 
@@ -88,11 +70,11 @@ namespace SpaceXAPI.UnitTests
         [Fact]
         public async void TestF4()
         {
-            SpaceXAPIClient client = new SpaceXAPIClient(new HttpClient(new Test4()));
+            SpaceXAPIClient client = new SpaceXAPIClient(new HttpClient(new Test(jsonLaunchEntityList)));
 
             var launchEntityList = await client.GetLaunches();
 
             launchEntityList.Should().BeEquivalentTo(launchEntityListFixture);
-        }
+        }   
     }
 }

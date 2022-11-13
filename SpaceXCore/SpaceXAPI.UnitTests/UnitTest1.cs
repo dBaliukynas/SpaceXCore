@@ -3,12 +3,13 @@ using SpaceXAPI.Entities;
 using System.Net;
 using System.Text.Json;
 using FluentAssertions;
+using Moq;
+using Moq.Protected;
 
 namespace SpaceXAPI.UnitTests
 {
     public class SpaceXAPIClientTests
     {
-
         Fixture fixture = new Fixture();
 
         static LaunchEntity launchEntityFixture = new Fixture().Create<LaunchEntity>();
@@ -24,25 +25,24 @@ namespace SpaceXAPI.UnitTests
         static string jsonLaunchEntityList = JsonSerializer.Serialize(launchEntityListFixture);
 
 
-        public class Test : HttpMessageHandler
+        public Mock<HttpMessageHandler> mockHttpClient(string jsonContent, string requestUri)
         {
-            string jsonContent;
+            Mock<HttpMessageHandler> handlerMock = new Mock<HttpMessageHandler>();
 
-            public Test(string content)
-                {
-                    jsonContent = content;
-                }
-
-            override protected Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+            handlerMock.Protected().Setup<Task<HttpResponseMessage>>("SendAsync", ItExpr.Is<HttpRequestMessage>(message => message.RequestUri == new Uri(requestUri)), ItExpr.IsAny<CancellationToken>())
+            .ReturnsAsync(new HttpResponseMessage
             {
-                return Task.FromResult(new HttpResponseMessage() { StatusCode = HttpStatusCode.OK, Content = new StringContent(jsonContent) });
-            }
+                StatusCode = HttpStatusCode.OK,
+                Content = new StringContent(jsonContent)
+            });
+
+            return handlerMock;
         }
 
         [Fact]
         public async void TestF()
         {
-            SpaceXAPIClient client = new SpaceXAPIClient(new HttpClient(new Test(jsonLaunchEntity)));
+            SpaceXAPIClient client = new SpaceXAPIClient(new HttpClient(mockHttpClient(jsonLaunchEntity, $"https://api.spacexdata.com/v5/launches/{launchEntityFixture.Id}").Object));
 
             var launchEntity = await client.GetLaunch(launchEntityFixture.Id);
 
@@ -51,7 +51,7 @@ namespace SpaceXAPI.UnitTests
         [Fact]
         public async void TestF2()
         {
-            SpaceXAPIClient client = new SpaceXAPIClient(new HttpClient(new Test(jsonRocketEntity)));
+            SpaceXAPIClient client = new SpaceXAPIClient(new HttpClient(mockHttpClient(jsonRocketEntity, $"https://api.spacexdata.com/v4/rockets/{rocketEntityFixture.Id}").Object));
 
             var rocketEntity = await client.GetRocket(rocketEntityFixture.Id);
 
@@ -60,7 +60,7 @@ namespace SpaceXAPI.UnitTests
         [Fact]
         public async void TestF3()
         {
-            SpaceXAPIClient client = new SpaceXAPIClient(new HttpClient(new Test(jsonRocketEntityList)));
+            SpaceXAPIClient client = new SpaceXAPIClient(new HttpClient(mockHttpClient(jsonRocketEntityList, "https://api.spacexdata.com/v4/rockets").Object));
 
             var rocketEntityList = await client.GetRockets();
 
@@ -70,7 +70,7 @@ namespace SpaceXAPI.UnitTests
         [Fact]
         public async void TestF4()
         {
-            SpaceXAPIClient client = new SpaceXAPIClient(new HttpClient(new Test(jsonLaunchEntityList)));
+            SpaceXAPIClient client = new SpaceXAPIClient(new HttpClient(mockHttpClient(jsonLaunchEntityList, "https://api.spacexdata.com/v5/launches").Object));
 
             var launchEntityList = await client.GetLaunches();
 

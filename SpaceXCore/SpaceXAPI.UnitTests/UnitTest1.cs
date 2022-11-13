@@ -40,7 +40,17 @@ namespace SpaceXAPI.UnitTests
         }
 
         [Fact]
-        public async void TestF()
+        public async void TestF1()
+        {
+            SpaceXAPIClient client = new SpaceXAPIClient(new HttpClient(mockHttpClient(jsonLaunchEntityList, "https://api.spacexdata.com/v5/launches").Object));
+
+            var launchEntityList = await client.GetLaunches();
+
+            launchEntityList.Should().BeEquivalentTo(launchEntityListFixture);
+        }
+
+        [Fact]
+        public async void TestF2()
         {
             SpaceXAPIClient client = new SpaceXAPIClient(new HttpClient(mockHttpClient(jsonLaunchEntity, $"https://api.spacexdata.com/v5/launches/{launchEntityFixture.Id}").Object));
 
@@ -48,17 +58,19 @@ namespace SpaceXAPI.UnitTests
 
             launchEntity.Should().BeEquivalentTo(launchEntityFixture);
         }
-        [Fact]
-        public async void TestF2()
-        {
-            SpaceXAPIClient client = new SpaceXAPIClient(new HttpClient(mockHttpClient(jsonRocketEntity, $"https://api.spacexdata.com/v4/rockets/{rocketEntityFixture.Id}").Object));
 
-            var rocketEntity = await client.GetRocket(rocketEntityFixture.Id);
-
-            rocketEntity.Should().BeEquivalentTo(rocketEntityFixture);
-        }
         [Fact]
         public async void TestF3()
+        {
+            SpaceXAPIClient client = new SpaceXAPIClient(new HttpClient(mockHttpClient(jsonLaunchEntity, "https://api.spacexdata.com/v5/launches/latest").Object));
+
+            var launchEntity = await client.GetLatestLaunch();
+
+            launchEntity.Should().BeEquivalentTo(launchEntityFixture);
+        }
+
+        [Fact]
+        public async void TestF4()
         {
             SpaceXAPIClient client = new SpaceXAPIClient(new HttpClient(mockHttpClient(jsonRocketEntityList, "https://api.spacexdata.com/v4/rockets").Object));
 
@@ -68,13 +80,14 @@ namespace SpaceXAPI.UnitTests
         }
 
         [Fact]
-        public async void TestF4()
+        public async void TestF5()
         {
-            SpaceXAPIClient client = new SpaceXAPIClient(new HttpClient(mockHttpClient(jsonLaunchEntityList, "https://api.spacexdata.com/v5/launches").Object));
+            SpaceXAPIClient client = new SpaceXAPIClient(new HttpClient(mockHttpClient(jsonRocketEntity, $"https://api.spacexdata.com/v4/rockets/{rocketEntityFixture.Id}").Object));
 
-            var launchEntityList = await client.GetLaunches();
+            var rocketEntity = await client.GetRocket(rocketEntityFixture.Id);
 
-            launchEntityList.Should().BeEquivalentTo(launchEntityListFixture);
-        }   
+            rocketEntity.Should().BeEquivalentTo(rocketEntityFixture);
+        }
+
     }
 }

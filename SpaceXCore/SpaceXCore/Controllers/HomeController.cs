@@ -15,7 +15,6 @@ namespace SpaceXCore.Controllers
         }
 
 
-
         public async Task<IActionResult> Index()
         {
             SpaceXAPIClient client = new SpaceXAPIClient(new HttpClient());

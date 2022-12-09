@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Net.Http;
+using System.Net.Http.Json;
 using System.Net.Sockets;
+using System.Text;
 using System.Text.Json;
 using SpaceXAPI.Entities;
 
@@ -52,6 +54,15 @@ namespace SpaceXAPI
             string responseBody = await client.GetStringAsync($"https://api.spacexdata.com/v4/rockets/{id}");
 
             return JsonSerializer.Deserialize<RocketEntity>(responseBody, serializerOptions);
+        }
+        public async Task<List<RocketEntity>> GetRocketsWithQuery(Dictionary<string, object> options)
+        {
+            var json = JsonSerializer.Serialize(options);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            var response = await client.PostAsync("https://api.spacexdata.com/v4/rockets/query", content);
+
+            var responseBody = await response.Content.ReadAsStringAsync();
+            return JsonSerializer.Deserialize<List<RocketEntity>>(responseBody, serializerOptions);
         }
     }
 }

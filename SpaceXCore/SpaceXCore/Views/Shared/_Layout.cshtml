@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/SpaceXCore.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="//unpkg.com/@@jarstone/dselect/dist/css/dselect.css">
+    <script src="//unpkg.com/@@jarstone/dselect/dist/js/dselect.js"></script>
 </head>
 <body>
     <header>
@@ -23,7 +25,10 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-dark" href="/rockets">Rockets</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="/launches">Launches</a>
                         </li>
                     </ul>
                 </div>
@@ -38,12 +43,13 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2022 - SpaceXCore - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2022 - SpaceXCore
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="//unpkg.com/alpinejs" defer></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

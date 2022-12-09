@@ -9,6 +9,7 @@ namespace SpaceXAPI.Entities
 {
     public class LaunchEntity
     {
+        [JsonPropertyName("name")]
         public string Name { get; set; }
 
         [JsonPropertyName("links")]

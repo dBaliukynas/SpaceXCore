@@ -33,19 +33,21 @@
             </div>
             <div class="modal-body">
                 <p class="mb-1">Name</p>
-                <select class="form-select mb-2" id="select-box" name="select-box" aria-label="Default select example" x-model="rocketName" x-init="rocketName = $el.options[$el.selectedIndex = 0].value">
+                <select class="form-select mb-2" id="select-box" name="select-box" aria-label="Default select example" x-model="name" x-init="name = $el.options[$el.selectedIndex = 0].value">
                     @foreach (var item in ViewBag.rockets)
                     {
                         <option>@item.Name</option>
                     }
                 </select>
                 <p class="mb-1">Height</p>
-                <input type="number" class="form-control mb-2" id="rocketHeightInput" x-model="rocketHeight">
-                <input class="form-check-input" type="checkbox" value="" id="reusableCheckbox" x-model="reusableCheckboxEnabled">
+                <input type="number" class="form-control mb-2" id="rocketHeightInput" x-model="height">
+                <p class="mb-1">Cost per launch</p>
+                <input type="number" class="form-control mb-2" id="rocketHeightInput" x-model="costPerLaunch">
+                <input class="form-check-input" type="checkbox" value="" id="reusableCheckbox" x-model="reusable">
                 <label class="form-check-label" for="reusableCheckbox">
                     Reusable
                 </label>
-                <button type="button" class="btn btn-primary w-100 mt-5" x-on:click="fetchData()">Search</button>
+                <button type="button" class="btn btn-primary w-100 mt-5" x-on:click="search(); fetchData()">Search</button>
             </div>
         </div>
     </div>
@@ -55,15 +57,31 @@
 
     function filters() {
         return {
-            reusableCheckboxEnabled: false,
-            rocketName: "",
-            rocketHeight: null,
+            reusable: null,
+            name: "",
+            height: null,
+            costPerLaunch: null,
             fetchData() {
-                console.log(this.reusableCheckboxEnabled);
-                console.log(this.rocketName);
-                console.log(this.rocketHeight);
+                console.log(this.reusable);
+                console.log(this.name);
+                console.log(this.height);
+            },
+            search() {
+                const searchParams = new URLSearchParams();
+                const url = "/rockets";
+
+                this.reusableCheckboxEnabled && searchParams.set("reusable", this.reusable);
+                this.name && searchParams.set("name", this.name);
+                this.rocketHeight && searchParams.set("height", this.height);
+                this.costPerLaunch && searchParams.set("costPerLaunch", this.costPerLaunch);
+
+                const queryString = searchParams.toString();
+                const fullUrl = `${url}?${queryString}`;
+                console.log(fullUrl);
+                window.location.replace(fullUrl);
             }
         }
     }
+
     
 </script>

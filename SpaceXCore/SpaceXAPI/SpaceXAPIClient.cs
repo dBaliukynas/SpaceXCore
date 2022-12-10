@@ -59,7 +59,19 @@ namespace SpaceXAPI
         }
         public async Task<List<RocketEntity>> GetRocketsWithQuery(RocketEntity rocketEntity)
         {
-            var json = JsonSerializer.Serialize(new EntityQuery<RocketEntity>() { Query = rocketEntity }, serializerOptions);
+            var json = JsonSerializer.Serialize(
+                new
+                {
+                    query = new Dictionary <string, object>
+                    {
+
+                        {"name", rocketEntity.Name },
+                        {"cost_per_launch", rocketEntity.CostPerLaunch },
+                        {"height.meters", rocketEntity.Height.Meters }
+
+
+                    },
+                });
             var options = new StringContent(json, Encoding.UTF8, "application/json");
             var response = await client.PostAsync("https://api.spacexdata.com/v4/rockets/query", options);
 

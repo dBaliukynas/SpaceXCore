@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SpaceXAPI;
 using SpaceXCore.Models;
+using SpaceXCore.Models.ViewModels;
 
 namespace SpaceXCore.Controllers
 {
@@ -16,9 +17,10 @@ namespace SpaceXCore.Controllers
 
             launch.Rocket = new RocketModel(await client.GetRocket(launch.RocketId));
 
-            ViewBag.launch = launch;
+            var model = new LaunchViewModel();
+            model.Launch = launch;
 
-            return View("Launch");
+            return View("Launch", model);
         }
     }
 }

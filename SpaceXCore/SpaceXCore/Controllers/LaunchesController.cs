@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SpaceXAPI;
 using SpaceXCore.Models;
+using SpaceXCore.Models.ViewModels;
 using System.Diagnostics;
 
 namespace SpaceXCore.Controllers
@@ -16,9 +17,10 @@ namespace SpaceXCore.Controllers
             var responseLaunches = await client.GetLaunches();
             var launches = responseLaunches.Select(launch => new LaunchModel(launch));
 
-            ViewBag.launches = launches;
+            var model = new LaunchesViewModel();
+            model.Launches = launches;
 
-            return View("Launches");
+            return View("Launches", model);
         }
     }
 }

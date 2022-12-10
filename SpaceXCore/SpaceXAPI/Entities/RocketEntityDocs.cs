@@ -10,6 +10,6 @@ namespace SpaceXAPI.Entities
     public class RocketEntityDocs
     {
         [JsonPropertyName("docs")]
-        public RocketEntity Docs { get; set; }
+        public List<RocketEntity> Docs { get; set; }
     }
 }

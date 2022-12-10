@@ -20,7 +20,6 @@ namespace SpaceXAPI
         private JsonSerializerOptions serializerOptions = new JsonSerializerOptions
         {
             PropertyNameCaseInsensitive = true,
-            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
         };
 
         public async Task<List<LaunchEntity>> GetLaunches()
@@ -57,27 +56,6 @@ namespace SpaceXAPI
 
             return JsonSerializer.Deserialize<RocketEntity>(responseBody, serializerOptions);
         }
-        public async Task<List<RocketEntity>> GetRocketsWithQuery(RocketEntity rocketEntity)
-        {
-            var json = JsonSerializer.Serialize(
-                new
-                {
-                    query = new Dictionary <string, object>
-                    {
-
-                        {"name", rocketEntity.Name },
-                        {"cost_per_launch", rocketEntity.CostPerLaunch },
-                        {"height.meters", rocketEntity.Height.Meters }
-
-
-                    },
-                });
-            var options = new StringContent(json, Encoding.UTF8, "application/json");
-            var response = await client.PostAsync("https://api.spacexdata.com/v4/rockets/query", options);
-
-            var responseBody = await response.Content.ReadAsStringAsync();
-            Console.WriteLine(responseBody);
-            return JsonSerializer.Deserialize<List<RocketEntity>>(responseBody, serializerOptions);
-        }
+     
     }
 }

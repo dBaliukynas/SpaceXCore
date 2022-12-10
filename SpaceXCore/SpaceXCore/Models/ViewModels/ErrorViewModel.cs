@@ -1,4 +1,4 @@
-namespace SpaceXCore.Models
+namespace SpaceXCore.Models.ViewModels
 {
     public class ErrorViewModel
     {

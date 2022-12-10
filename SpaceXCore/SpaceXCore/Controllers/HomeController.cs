@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SpaceXAPI;
 using SpaceXCore.Models;
+using SpaceXCore.Models.ViewModels;
 using System.Diagnostics;
 
 namespace SpaceXCore.Controllers
@@ -20,18 +21,20 @@ namespace SpaceXCore.Controllers
             SpaceXAPIClient client = new SpaceXAPIClient(new HttpClient());
 
             var responseRockets = await client.GetRockets();
-            var responseLatestLaunch = await client.GetLatestLaunch();
             var responseLaunches = await client.GetLaunches();
+            var responseLatestLaunch = await client.GetLatestLaunch();
 
             var rockets = responseRockets.Select(rocket => new RocketModel(rocket));
-            var latestLaunch = new LaunchModel(responseLatestLaunch);
             var launches = responseLaunches.Select(launch => new LaunchModel(launch));
+            var latestLaunch = new LaunchModel(responseLatestLaunch);
 
-            ViewBag.rockets = rockets;
-            ViewBag.latestLaunch = latestLaunch;
-            ViewBag.launches = launches;
+            var model = new HomeViewModel();
 
-            return View();
+            model.Rockets = rockets;
+            model.Launches = launches;
+            model.LatestLaunch = latestLaunch;
+
+            return View(model);
         }
 
         public IActionResult Privacy()

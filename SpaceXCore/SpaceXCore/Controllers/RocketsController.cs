@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SpaceXAPI;
 using SpaceXCore.Models;
+using SpaceXCore.Models.ViewModels;
 using SpaceXAPI.Entities;
 using System.Diagnostics;
+using System.Net.Sockets;
 
 namespace SpaceXCore.Controllers
 {
@@ -17,22 +19,22 @@ namespace SpaceXCore.Controllers
 
             var responseRockets = await client.GetRockets();
 
-            var rockets = responseRockets.Select(rocket => new RocketModel(rocket));
+            var allRockets = responseRockets.Select(rocket => new RocketModel(rocket));
 
-            var rocketEntity = new RocketEntity();
-            rocketEntity.Name = name;
-            //rocketEntity.FirstStage = new FirstStage();
-            //rocketEntity.FirstStage.Reusable = reusable;
-            rocketEntity.Height = new Diameter();
-            rocketEntity.Height.Meters = height;
-            rocketEntity.CostPerLaunch = costPerLaunch;
 
-            var responseQueryRockets = await client.GetRocketsWithQuery(rocketEntity);
-            var queryRockets = responseQueryRockets.Select(responseQueryRocket => new RocketModel(responseQueryRocket));
-    
-            ViewBag.rockets = rockets;
+            var listedRockets = allRockets.Where(
+                rocket => (name == null || rocket.Name == name) &&
+                (costPerLaunch == null || rocket.Cost == costPerLaunch) &&
+                (height == null || rocket.Height == height)).ToList();
 
-            return View("Rockets");
+            var model = new RocketsViewModel();
+
+            model.AllRockets = allRockets;
+            model.ListedRockets = listedRockets;
+
+
+
+            return View("Rockets", model);
         }
     }
 }

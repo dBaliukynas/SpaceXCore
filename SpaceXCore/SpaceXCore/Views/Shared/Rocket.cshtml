@@ -1,29 +1,29 @@
 ﻿@{
-    ViewData["Title"] = $"Rocket - {@ViewBag.rocket.Name}";
+    ViewData["Title"] = $"Rocket - {@Model.Rocket.Name}";
 }
 
 
 <div class="text-center">
   
-    <vc:top-image-container image=@ViewBag.rocket.Images[0] name=@ViewBag.rocket.Name></vc:top-image-container>
+    <vc:top-image-container image=@Model.Rocket.Images[0] name=@Model.Rocket.Name></vc:top-image-container>
     <div class="list-group-container">
     <ul class="list-group">
-        <li class="list-group-item"><strong>Name</strong>: @ViewBag.rocket.Name</li>
-        <li class="list-group-item"><strong>Description</strong>: @ViewBag.rocket.Description</li>
-        <li class="list-group-item"><strong>Height</strong>: @(ViewBag.rocket.Height)m </li>
-        <li class="list-group-item"><strong>Diameter</strong>: @(ViewBag.rocket.Diameter)m</li>
-        <li class="list-group-item"><strong>Mass</strong>: @(ViewBag.rocket.Mass)kg</li>
-        <li class="list-group-item"><strong>Cost per launch</strong>: @(ViewBag.rocket.Cost)$</li>
-        <li class="list-group-item"><strong>Stages</strong>: @ViewBag.rocket.Stages</li>
-        <li class="list-group-item"><strong>Boosters</strong>: @ViewBag.rocket.Boosters</li>
-        <li class="list-group-item"><strong>First flight</strong>: @ViewBag.rocket.FirstFlight</li>
+        <li class="list-group-item"><strong>Name</strong>: @Model.Rocket.Name</li>
+        <li class="list-group-item"><strong>Description</strong>: @Model.Rocket.Description</li>
+        <li class="list-group-item"><strong>Height</strong>: @(Model.Rocket.Height)m </li>
+        <li class="list-group-item"><strong>Diameter</strong>: @(Model.Rocket.Diameter)m</li>
+        <li class="list-group-item"><strong>Mass</strong>: @(Model.Rocket.Mass)kg</li>
+        <li class="list-group-item"><strong>Cost per launch</strong>: @(Model.Rocket.Cost)$</li>
+        <li class="list-group-item"><strong>Stages</strong>: @Model.Rocket.Stages</li>
+        <li class="list-group-item"><strong>Boosters</strong>: @Model.Rocket.Boosters</li>
+        <li class="list-group-item"><strong>First flight</strong>: @Model.Rocket.FirstFlight</li>
         <li class="list-group-item list-group-header">First Stage</li>
-        <li class="list-group-item list-group-item-level-2"><strong>Thrust of Sea Level engines</strong>: @(ViewBag.rocket.ThrustSeaLevelFS)kN</li>
-        <li class="list-group-item list-group-item-level-2"><strong>Thrust of Vacuum engines</strong>: @(ViewBag.rocket.ThrustVacuumFS)kN</li>
-        <li class="list-group-item list-group-item-level-2"><strong>Reusable</strong>: @(ViewBag.rocket.ReusableFS ? "Yes" : "No")</li>
+        <li class="list-group-item list-group-item-level-2"><strong>Thrust of Sea Level engines</strong>: @(Model.Rocket.ThrustSeaLevelFS)kN</li>
+        <li class="list-group-item list-group-item-level-2"><strong>Thrust of Vacuum engines</strong>: @(Model.Rocket.ThrustVacuumFS)kN</li>
+        <li class="list-group-item list-group-item-level-2"><strong>Reusable</strong>: @(Model.Rocket.ReusableFS ? "Yes" : "No")</li>
         <li class="list-group-item list-group-header">Second Stage</li>
-        <li class="list-group-item list-group-item-level-2"><strong>Thrust</strong>: @(ViewBag.rocket.ThrustSS)kN</li>
-        <li class="list-group-item list-group-item-level-2"><strong>Reusable</strong>: @(ViewBag.rocket.ReusableSS ? "Yes" : "No")</li>
+        <li class="list-group-item list-group-item-level-2"><strong>Thrust</strong>: @(Model.Rocket.ThrustSS)kN</li>
+        <li class="list-group-item list-group-item-level-2"><strong>Reusable</strong>: @(Model.Rocket.ReusableSS ? "Yes" : "No")</li>
     </ul>
     </div>
 

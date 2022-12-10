@@ -6,7 +6,7 @@
 <div class="text-center">
     <h1 class="display-4 mb-20">Launches</h1>
     <div class="card-list">
-        @foreach (var item in ViewBag.launches)
+        @foreach (var item in Model.Launches)
         {
             <div class="card card-item" style="width: 18rem;">
                 <img src="@item.Image" class="card-img-top card-image image-contain" alt="...">

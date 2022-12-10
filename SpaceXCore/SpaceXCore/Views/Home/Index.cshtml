@@ -10,7 +10,7 @@
         <svg class="cursor-pointer position-absolute filter-button" data-bs-toggle="modal" data-bs-target="#filteringRocketsModal" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#000000e6" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line><line x1="17" y1="16" x2="23" y2="16"></line></svg>
     </div>
     <div class="card-list">
-        @foreach (var item in ViewBag.rockets)
+        @foreach (var item in Model.Rockets)
         {
             <div class="card card-item card-item-medium-wide" style="width: 18rem;">
                 <img src="@item.Images[0]" class="card-img-top card-image" alt="...">
@@ -23,9 +23,9 @@
         }
     </div>
     <h1 class="display-4 mb-20">Latest launch</h1>
-    <a href="launch/@ViewBag.latestLaunch.Id" class="medium-sized-image-container">
-        <h2>@ViewBag.latestLaunch.Name</h2>
-        <img src="@ViewBag.latestLaunch.Image" class="img-fluid medium-sized-image mb-20" alt="...">
+    <a href="launch/@Model.LatestLaunch.Id" class="medium-sized-image-container">
+        <h2>@Model.LatestLaunch.Name</h2>
+        <img src="@Model.LatestLaunch.Image" class="img-fluid medium-sized-image mb-20" alt="...">
     </a>
    
     <div class="d-flex justify-content-center align-items-center mb-20">
@@ -33,7 +33,7 @@
         <svg class="cursor-pointer position-absolute filter-button" data-bs-toggle="modal" data-bs-target="#filteringLaunchesModal" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#000000e6" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line><line x1="17" y1="16" x2="23" y2="16"></line></svg>
     </div>
     <div class="card-list">
-        @foreach (var item in ViewBag.launches)
+        @foreach (var item in Model.Launches)
         {
             <div class="card card-item" style="width: 18rem;">
                 <img src="@item.Image" class="card-img-top card-image image-contain" alt="...">

@@ -2,8 +2,8 @@
 {
     public class HomeViewModel
     {
-        public IEnumerable<RocketModel>Rockets;
-        public IEnumerable<LaunchModel> Launches;
-        public LaunchModel LatestLaunch;
+        public IEnumerable<RocketModel>Rockets { get; set; }
+        public IEnumerable<LaunchModel> Launches { get; set; }
+        public LaunchModel LatestLaunch { get; set; }
     }
 }

@@ -1,6 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Rockets";
 }
+@using System.Linq;
 
 
 <div class="text-center">
@@ -28,21 +29,34 @@
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-4" id="filteringRocketsModalLabel">Filtering</h1>
+                <h1 class="modal-title fs-4" id="filteringRocketsModalLabel">Filtering Rockets</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <p class="mb-1">Name</p>
-                <select class="form-select mb-2" id="select-box" name="select-box" aria-label="Default select example" x-model="name" x-init="name = $el.options[$el.selectedIndex = 0].value">
+                <select class="form-select mb-2" id="select-box-rocket-name" name="select-box-rocket-name" aria-label="Default select example" x-model="name" x-init="name = $el.options[$el.selectedIndex = 0].value">
+                    <option value="" selected>Select your option</option>
                     @foreach (var item in Model.AllRockets)
                     {
                         <option>@item.Name</option>
                     }
                 </select>
                 <p class="mb-1">Height</p>
-                <input type="number" class="form-control mb-2" id="rocketHeightInput" x-model="height">
+                <input type="number" class="form-control mb-2" id="heightInput" x-model="height" list="heightListOptions">
+                <datalist id="heightListOptions">
+                    @foreach (var height in (Model.AllRockets as IEnumerable<RocketModel>).Select(rocket => rocket.Height).Distinct())
+                    {
+                        <option>@height</option>
+                    }
+                </datalist>
                 <p class="mb-1">Cost per launch</p>
-                <input type="number" class="form-control mb-2" id="rocketHeightInput" x-model="costPerLaunch">
+                <input type="number" class="form-control mb-2" id="costPerLanchInput" x-model="costPerLaunch" list="costPerLaunchListOptions">
+                <datalist id="costPerLaunchListOptions">
+                    @foreach (var item in Model.AllRockets)
+                    {
+                        <option>@item.Cost</option>
+                    }
+                </datalist>
                 <input class="form-check-input" type="checkbox" value="" id="reusableCheckbox" x-model="reusable">
                 <label class="form-check-label" for="reusableCheckbox">
                     Reusable
@@ -52,36 +66,4 @@
         </div>
     </div>
 </div>
-<script>
-    dselect(document.querySelector("#select-box"), {search: true});
-
-    function filters() {
-        return {
-            reusable: null,
-            name: "",
-            height: null,
-            costPerLaunch: null,
-            fetchData() {
-                console.log(this.reusable);
-                console.log(this.name);
-                console.log(this.height);
-            },
-            search() {
-                const searchParams = new URLSearchParams();
-                const url = "/rockets";
-
-                this.reusableCheckboxEnabled && searchParams.set("reusable", this.reusable);
-                this.name && searchParams.set("name", this.name);
-                this.height && searchParams.set("height", this.height);
-                this.costPerLaunch && searchParams.set("costPerLaunch", this.costPerLaunch);
-
-                const queryString = searchParams.toString();
-                const fullUrl = `${url}?${queryString}`;
-                console.log(fullUrl);
-                window.location.replace(fullUrl);
-            }
-        }
-    }
-
-    
-</script>
+<script src="~/js/FilteringRockets.js"></script>

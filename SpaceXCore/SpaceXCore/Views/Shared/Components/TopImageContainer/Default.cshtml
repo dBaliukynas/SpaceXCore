@@ -1,4 +1,4 @@
 ﻿<div class="image-text-container">
-    <img src="@ViewBag.Image" class="image-low-brightness @(ViewBag.containImage ? "image-contain" : "")" />
-    <h1 class="display-4 title-2 image-text-center">@ViewBag.Name</h1>
+    <img src="@Model.Image" class="image-low-brightness @(Model.ImageObjectFitContain ? "image-object-fit-contain" : "")" />
+    <h1 class="display-4 title-2 image-text-center">@Model.Name</h1>
 </div>

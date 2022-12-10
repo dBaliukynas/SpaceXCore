@@ -104,7 +104,7 @@ body {
     text-align: start;
 }
 
-.image-contain {
+.image-object-fit-contain {
     object-fit: contain;
 }
 

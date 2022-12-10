@@ -19,7 +19,7 @@ namespace SpaceXCore.Controllers
 
             var responseRockets = await client.GetRockets();
 
-            var allRockets = responseRockets.Select(rocket => new RocketModel(rocket));
+            var allRockets = responseRockets.Select(rocket => new RocketModel(rocket)).ToList();
 
 
             var listedRockets = allRockets.Where(

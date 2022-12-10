@@ -1,14 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SpaceXCore.Models.ViewModels;
 
 [ViewComponent(Name = "TopImageContainer")]
 public class TopImageContainerVC : ViewComponent
 {
-    public IViewComponentResult Invoke(Uri Image, string Name, bool containImage=false)
+    public IViewComponentResult Invoke(Uri Image, string Name, bool imageObjectFitContain=false)
     {
-        ViewBag.Image = Image;
-        ViewBag.Name = Name;
-        ViewBag.ContainImage = containImage;
+        var model = new TopImageContainerViewModel();
 
-        return View();
+        model.Image = Image;
+        model.Name = Name;
+        model.ImageObjectFitContain = imageObjectFitContain;
+
+        return View(model);
     }
 }

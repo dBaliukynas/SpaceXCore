@@ -36,7 +36,7 @@
         @foreach (var item in Model.Launches)
         {
             <div class="card card-item" style="width: 18rem;">
-                <img src="@item.Image" class="card-img-top card-image image-contain" alt="...">
+                <img src="@item.Image" class="card-img-top card-image image-object-fit-contain" alt="...">
                 <div class="card-body d-flex flex-column">
                     <h5 class="card-title">@item.Name</h5>
                     <p class="card-text truncate-7">@item.Details</p>
@@ -47,3 +47,75 @@
     </div>
 
 </div>
+<div class="modal fade" id="filteringRocketsModal" tabindex="-1" aria-labelledby="filteringRocketsModalLabel" style="display: none;" aria-hidden="true"
+     x-data="filters()">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-4" id="filteringRocketsModalLabel">Filtering Rockets</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p class="mb-1">Name</p>
+                <select class="form-select mb-2" id="select-box-rocket-name" name="select-box-rocket-name" aria-label="Default select example" x-model="name" x-init="name = $el.options[$el.selectedIndex = 0].value">
+                    <option value="" selected>Select your option</option>
+                    @foreach (var item in Model.Rockets)
+                    {
+                        <option>@item.Name</option>
+                    }
+                </select>
+                <p class="mb-1">Height</p>
+                <input type="number" class="form-control mb-2" id="heightInput" x-model="height" list="heightListOptions">
+                <datalist id="heightListOptions">
+                    @foreach (var height in (Model.Rockets as IEnumerable<RocketModel>).Select(rocket => rocket.Height).Distinct())
+                    {
+                        <option>@height</option>
+                    }
+                </datalist>
+                <p class="mb-1">Cost per launch</p>
+                <input type="number" class="form-control mb-2" id="costPerLanchInput" x-model="costPerLaunch" list="costPerLaunchListOptions">
+                <datalist id="costPerLaunchListOptions">
+                    @foreach (var item in Model.Rockets)
+                    {
+                        <option>@item.Cost</option>
+                    }
+                </datalist>
+                <input class="form-check-input" type="checkbox" value="" id="reusableCheckbox" x-model="reusable">
+                <label class="form-check-label" for="reusableCheckbox">
+                    Reusable
+                </label>
+                <button type="button" class="btn btn-primary w-100 mt-5" x-on:click="search(); fetchData()">Search</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="filteringLaunchesModal" tabindex="-1" aria-labelledby="filteringLaunchesModalLabel" style="display: none;" aria-hidden="true"
+     x-data="filters()">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-4" id="filteringLaunchesModalLabel">Filtering Launches</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p class="mb-1">Name</p>
+                <select class="form-select mb-2" id="select-box" name="select-box" aria-label="Default select example" x-model="name" x-init="name = $el.options[$el.selectedIndex = 0].value">
+                    @foreach (var item in Model.Rockets)
+                    {
+                        <option>@item.Name</option>
+                    }
+                </select>
+                <p class="mb-1">Height</p>
+                <input type="number" class="form-control mb-2" id="rocketHeightInput" x-model="height">
+                <p class="mb-1">Cost per launch</p>
+                <input type="number" class="form-control mb-2" id="rocketHeightInput" x-model="costPerLaunch">
+                <input class="form-check-input" type="checkbox" value="" id="reusableCheckbox" x-model="reusable">
+                <label class="form-check-label" for="reusableCheckbox">
+                    Reusable
+                </label>
+                <button type="button" class="btn btn-primary w-100 mt-5" x-on:click="search(); fetchData()">Search</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/js/FilteringRockets.js"></script>

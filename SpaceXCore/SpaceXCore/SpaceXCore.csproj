@@ -6,6 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\js\FilteringRockets.js" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\SpaceXAPI\SpaceXAPI.csproj" />
   </ItemGroup>
 

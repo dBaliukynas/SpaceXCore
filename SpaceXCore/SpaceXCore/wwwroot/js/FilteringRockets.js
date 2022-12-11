@@ -1,28 +1,27 @@
 ﻿dselect(document.querySelector("#select-box-rocket-name"), { search: true, clearable: true });
 
-function filters() {
+function rocketFilters() {
     return {
-        reusable: null,
-        name: "",
+        reusableFS: null,
+        notReusableFS: null,
+        name: null,
         height: null,
         costPerLaunch: null,
         fetchData() {
-            console.log(this.reusable);
-            console.log(this.name);
-            console.log(this.height);
+         
         },
         search() {
             const searchParams = new URLSearchParams();
             const url = "/rockets";
 
-            this.reusableCheckboxEnabled && searchParams.set("reusable", this.reusable);
+            this.reusableFS && searchParams.set("reusable-fs", this.reusableFS);
+            this.notReusableFS && searchParams.set("not-reusable-fs", this.notReusableFS);
             this.name && searchParams.set("name", this.name);
             this.height && searchParams.set("height", this.height);
-            this.costPerLaunch && searchParams.set("costPerLaunch", this.costPerLaunch);
+            this.costPerLaunch && searchParams.set("cost-per-launch", this.costPerLaunch);
 
             const queryString = searchParams.toString();
             const fullUrl = `${url}?${queryString}`;
-            console.log(fullUrl);
             window.location.replace(fullUrl);
         }
     }

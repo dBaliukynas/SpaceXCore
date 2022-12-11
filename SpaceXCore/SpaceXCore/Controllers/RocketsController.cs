@@ -11,9 +11,9 @@ namespace SpaceXCore.Controllers
     public class RocketsController : Controller
     {
         [Route("Rockets")]
-        public async Task<IActionResult> Index([FromQuery] bool? reusable,
-                                             [FromQuery] string name, [FromQuery] double? height,
-                                             [FromQuery] long? costPerLaunch)
+        public async Task<IActionResult> Index([FromQuery] string name, [FromQuery] double? height,
+            [FromQuery(Name = "cost-per-launch")] long? costPerLaunch, [FromQuery(Name = "reusable-fs")] bool? reusableFS,
+            [FromQuery(Name = "not-reusable-fs")] bool? notReusableFS)
         {
             SpaceXAPIClient client = new SpaceXAPIClient(new HttpClient());
 
@@ -25,7 +25,9 @@ namespace SpaceXCore.Controllers
             var listedRockets = allRockets.Where(
                 rocket => (name == null || rocket.Name == name) &&
                 (costPerLaunch == null || rocket.Cost == costPerLaunch) &&
-                (height == null || rocket.Height == height)).ToList();
+                (height == null || rocket.Height == height) &&
+                (rocket.ReusableFS == reusableFS ||
+                rocket.ReusableFS == !notReusableFS || reusableFS == null && notReusableFS == null)).ToList();
 
             var model = new RocketsViewModel();
 

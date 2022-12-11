@@ -1,6 +1,7 @@
 ﻿@{
     ViewData["Title"] = $"Launch - {Model.Launch.Name}";
 }
+@model SpaceXCore.Models.ViewModels.LaunchViewModel
 
 
 <div class="text-center">
@@ -13,7 +14,7 @@
         <li class="list-group-item"><strong>Rocket</strong>: <a href="/rocket/@Model.Launch.Rocket.Id">@Model.Launch.Rocket.Name</a></li>
         <li class="list-group-item"><strong>Static Fire date</strong>: @(Model.Launch.StaticFireDate != null ? Model.Launch.StaticFireDate : "-")</li>
         <li class="list-group-item"><strong>Launch date</strong>: @(Model.Launch.StaticFireDate != null ? Model.Launch.LaunchDate : "-")</li>
-        <li class="list-group-item"><strong>Succeeded</strong>: @(Model.Launch.Success != null ? (Model.Launch.Success ? "Yes" : "No") : "-")</li>
+        <li class="list-group-item"><strong>Succeeded</strong>: @(Model.Launch.Success != null ? (Model.Launch.Success.GetValueOrDefault() ? "Yes" : "No") : "-")</li>
     </ul>
     </div>
 

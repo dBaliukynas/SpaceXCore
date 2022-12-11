@@ -1,7 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Launches";
 }
-
+@model SpaceXCore.Models.ViewModels.LaunchesViewModel
 
 <div class="text-center">
     <div class="d-flex justify-content-center align-items-center mb-20">
@@ -9,10 +9,10 @@
         <svg class="cursor-pointer position-absolute filter-button" data-bs-toggle="modal" data-bs-target="#filteringLaunchesModal" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#000000e6" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line><line x1="17" y1="16" x2="23" y2="16"></line></svg>
     </div>
     <div class="card-list">
-        @foreach (var item in Model.Launches)
+        @foreach (var item in Model.ListedLaunches)
         {
             <div class="card card-item" style="width: 18rem;">
-                <img src="@item.Image" class="card-img-top card-image image-contain" alt="...">
+                <img src="@item.Image" class="card-img-top card-image image-object-fit-contain" alt="...">
                 <div class="card-body d-flex flex-column">
                     <h5 class="card-title">@item.Name</h5>
                     <p class="card-text truncate-7">@item.Details</p>
@@ -23,7 +23,7 @@
     </div>
 </div>
 <div class="modal fade" id="filteringLaunchesModal" tabindex="-1" aria-labelledby="filteringLaunchesModalLabel" style="display: none;" aria-hidden="true"
-     x-data="filters()">
+     x-data="launchFilters()">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
@@ -32,20 +32,22 @@
             </div>
             <div class="modal-body">
                 <p class="mb-1">Name</p>
-                <select class="form-select mb-2" id="select-box-launch-name" name="select-box" aria-label="Default select example" x-model="name" x-init="name = $el.options[$el.selectedIndex = 0].value">
-                    @foreach (var item in Model.Launches)
+                <select class="form-select mb-2" id="select-box-launch-name" name="select-box-launch-name" aria-label="Default select example" x-model="name">
+                    <option value="" selected>Select your option</option>
+                    @foreach (var item in Model.AllLaunches)
                     {
                         <option>@item.Name</option>
                     }
                 </select>
                 <p class="mb-1">Rocket</p>
-                <select class="form-select mb-2" id="select-box-launch-name" name="select-box" aria-label="Default select example" x-model="name" x-init="name = $el.options[$el.selectedIndex = 0].value">
-                    @foreach (var item in Model.Launches)
+                <select class="form-select mb-2" id="select-box-launch-rocket-name" name="select-box-rocket-name" aria-label="Default select example" x-model="rocketName">
+                    <option value="" selected>Select your option</option>
+                    @foreach (var item in Model.Rockets)
                     {
                         <option>@item.Name</option>
                     }
                 </select>
-                <button type="button" class="btn btn-primary w-100 mt-5" x-on:click="search(); fetchData()">Search</button>
+                <button type="button" class="btn btn-primary w-100 mt-5" x-on:click="search()">Search</button>
             </div>
         </div>
     </div>

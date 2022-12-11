@@ -2,6 +2,8 @@
 {
     public class LaunchesViewModel
     {
-        public IEnumerable<LaunchModel> Launches { get; set; }
+        public IEnumerable<LaunchModel> AllLaunches { get; set; }
+        public IEnumerable<LaunchModel> ListedLaunches { get; set; }
+        public IEnumerable<RocketModel> Rockets { get; set; }
     }
 }

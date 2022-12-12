@@ -5,8 +5,6 @@ function launchFilters() {
     return {
         name: null,
         rocketName: null,
-        fetchData() {
-        },
         search() {
             const searchParams = new URLSearchParams();
             const url = "/launches";

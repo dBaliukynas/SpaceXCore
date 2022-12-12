@@ -7,10 +7,6 @@ function rocketFilters() {
         name: null,
         height: null,
         costPerLaunch: null,
-        fetchData() {
-            console.log(this.name);
-         
-        },
         search() {
             const searchParams = new URLSearchParams();
             const url = "/rockets";

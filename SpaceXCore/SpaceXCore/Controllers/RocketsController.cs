@@ -40,14 +40,6 @@ namespace SpaceXCore.Controllers
             model.ReusableFS = reusableFS;
             model.NotReusableFS = notReusableFS;
 
-            Console.WriteLine(name);
-            Console.WriteLine(height);
-            Console.WriteLine(costPerLaunch);
-            Console.WriteLine(reusableFS);
-            Console.WriteLine(notReusableFS);
-
-
-
             return View("Rockets", model);
         }
     }

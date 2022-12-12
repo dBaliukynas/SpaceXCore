@@ -3,6 +3,7 @@
 }
 @model SpaceXCore.Models.ViewModels.RocketsViewModel
 @using System.Linq;
+@using System.Globalization
 
 
 
@@ -36,24 +37,25 @@
             </div>
             <div class="modal-body">
                 <p class="mb-1">Name</p>
-                <select class="form-select mb-2" id="select-box-rocket-name" name="select-box-rocket-name" aria-label="Default select example" x-model="name" x-init="name=getQueryParameter('name')">
+                <select class="form-select mb-2" id="select-box-rocket-name" name="select-box-rocket-name" aria-label="Default select example" x-model="name">
                     <option value="">Select your option</option>
+  
                     @foreach (var item in Model.AllRockets)
                     {
-                        <option x-bind:selected="true" selected>@item.Name</option>
+                        <option selected="@(Model.Name == item.Name)">@item.Name</option>
                     }
                 </select>
                 <p class="mb-1">Height</p>
 
-                <input type="number" class="form-control mb-2" id="heightInput" x-model="height" list="heightListOptions" x-init="height=getQueryParameter('height')">
+                <input type="number" class="form-control mb-2" id="heightInput" x-model="height" list="heightListOptions" x-init="height='@Model.Height.ToString().Replace(',', '.')'">
                 <datalist id="heightListOptions">
                     @foreach (var height in Model.AllRockets.Select(rocket => rocket.Height).Distinct())
                     {
-                        <option>@height</option>
+                        <option>@height.ToString().Replace(',', '.')</option>
                     }
                 </datalist>
                 <p class="mb-1">Cost per launch</p>
-                <input type="number" class="form-control mb-2" id="costPerLanchInput" x-model="costPerLaunch" list="costPerLaunchListOptions" x-init="costPerLaunch=getQueryParameter('cost-per-launch')">
+                <input type="number" class="form-control mb-2" id="costPerLanchInput" x-model="costPerLaunch" list="costPerLaunchListOptions" x-init="costPerLaunch='@Model.CostPerLaunch'">
                 <datalist id="costPerLaunchListOptions">
                     @foreach (var item in Model.AllRockets)
                     {
@@ -62,11 +64,11 @@
                 </datalist>
                 <p class="mb-1">Reusable</p>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" x-on:click="reusableFS ? reusableFS = null : reusableFS = true" x-init="reusableFS=true">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" x-on:click="reusableFS ? reusableFS = null : reusableFS = true" checked="@(Model.ReusableFS)" x-init="reusableFS='@Model.ReusableFS.ToString().ToLower()'">
                     <label class="form-check-label" for="inlineCheckbox1">Yes</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2" x-model="notReusableFS" x-on:click="notReusableFS ? notReusableFS = null : notReusableFS = true; fetchData()" x-init="getQueryParameter('not-reusable-fs')">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2" x-model="notReusableFS" x-on:click="notReusableFS ? notReusableFS = null : notReusableFS = true" checked="@(Model.NotReusableFS)" x-init="notReusableFS='@Model.NotReusableFS.ToString().ToLower()'">
                     <label class="form-check-label" for="inlineCheckbox2">No</label>
                 </div>
                 <button type="button" class="btn btn-primary w-100 mt-5" x-on:click="search()">Search</button>
@@ -75,26 +77,3 @@
     </div>
 </div>
 <script src="~/js/FilteringRockets.js"></script>
-<script>
-    function getQueryParameter(parameter)
-    {
-        const queryString = window.location.search
-        const urlParams = new URLSearchParams(queryString);
-        //console.log(urlParams.get("height"));
-        //console.log(urlParams.get("name"));
-        //console.log(urlParams.get("cost-per-launch"));
-        //console.log(urlParams.get("reusable-fs") == "true");
-        //console.log(urlParams.get("reusable-fs") != null ? (urlParams.get("reusable-fs") == "true" ? true : false) : null);
-        //console.log(urlParams.get(urlParams.get("reusable-fs") == null ? (urlParams.get("reusable-fs") == "true" ? true : false) : null));
-        //console.log(urlParams.get("not-reusable-fs"));
-
-        var queryParamsDict = { "name" : urlParams.get("name"),
-                                "height": urlParams.get("height"),
-                                "cost-per-launch": urlParams.get("cost-per-launch"),
-            "reusable-fs": urlParams.get("reusable-fs") != null ? (urlParams.get("reusable-fs") == "true" ? true : false) : null,
-                                "not-reusable-fs": urlParams.get("not-reusable-fs")};
-        return queryParamsDict[parameter];
-    }
-
-    //console.log(getQueryParameter("reusable-fs"));
-</script>

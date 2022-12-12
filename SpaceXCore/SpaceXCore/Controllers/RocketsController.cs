@@ -5,6 +5,7 @@ using SpaceXCore.Models.ViewModels;
 using SpaceXAPI.Entities;
 using System.Diagnostics;
 using System.Net.Sockets;
+using System.Reflection;
 
 namespace SpaceXCore.Controllers
 {
@@ -33,6 +34,17 @@ namespace SpaceXCore.Controllers
 
             model.AllRockets = allRockets;
             model.ListedRockets = listedRockets;
+            model.Name = name;
+            model.Height = height;
+            model.CostPerLaunch = costPerLaunch;
+            model.ReusableFS = reusableFS;
+            model.NotReusableFS = notReusableFS;
+
+            Console.WriteLine(name);
+            Console.WriteLine(height);
+            Console.WriteLine(costPerLaunch);
+            Console.WriteLine(reusableFS);
+            Console.WriteLine(notReusableFS);
 
 
 

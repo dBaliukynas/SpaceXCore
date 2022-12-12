@@ -59,19 +59,20 @@
             <div class="modal-body">
                 <p class="mb-1">Name</p>
                 <select class="form-select mb-2" id="select-box-rocket-name" name="select-box-rocket-name" aria-label="Default select example" x-model="name">
-                    <option value="" selected>Select your option</option>
+                    <option value="">Select your option</option>
+  
                     @foreach (var item in Model.Rockets)
                     {
                         <option>@item.Name</option>
                     }
                 </select>
                 <p class="mb-1">Height</p>
-  
+
                 <input type="number" class="form-control mb-2" id="heightInput" x-model="height" list="heightListOptions">
                 <datalist id="heightListOptions">
                     @foreach (var height in Model.Rockets.Select(rocket => rocket.Height).Distinct())
                     {
-                        <option>@height</option>
+                        <option>@height.ToString().Replace(',', '.')</option>
                     }
                 </datalist>
                 <p class="mb-1">Cost per launch</p>

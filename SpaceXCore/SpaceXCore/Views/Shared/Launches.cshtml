@@ -36,7 +36,7 @@
                     <option value="" selected>Select your option</option>
                     @foreach (var item in Model.AllLaunches)
                     {
-                        <option>@item.Name</option>
+                        <option selected="@(Model.Name == item.Name)">@item.Name</option>
                     }
                 </select>
                 <p class="mb-1">Rocket</p>
@@ -44,7 +44,7 @@
                     <option value="" selected>Select your option</option>
                     @foreach (var item in Model.Rockets)
                     {
-                        <option>@item.Name</option>
+                        <option selected="@(Model.RocketName == item.Name)">@item.Name</option>
                     }
                 </select>
                 <button type="button" class="btn btn-primary w-100 mt-5" x-on:click="search()">Search</button>

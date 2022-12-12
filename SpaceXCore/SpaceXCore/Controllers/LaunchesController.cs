@@ -32,6 +32,8 @@ namespace SpaceXCore.Controllers
             model.AllLaunches = allLaunches;
             model.ListedLaunches = listedLaunches;
             model.Rockets = rockets;
+            model.Name = name;
+            model.RocketName = rocketName;
 
             return View("Launches", model);
         }

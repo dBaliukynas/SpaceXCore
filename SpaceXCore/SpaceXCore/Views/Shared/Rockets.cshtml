@@ -64,11 +64,11 @@
                 </datalist>
                 <p class="mb-1">Reusable</p>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" x-on:click="reusableFS ? reusableFS = null : reusableFS = true" checked="@(Model.ReusableFS)" x-init="reusableFS='@Model.ReusableFS.ToString().ToLower()'">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" x-model="reusableFS" checked="@(Model.ReusableFS)" x-init="reusableFS='@Model.ReusableFS.ToString().ToLower()'">
                     <label class="form-check-label" for="inlineCheckbox1">Yes</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2" x-model="notReusableFS" x-on:click="notReusableFS ? notReusableFS = null : notReusableFS = true" checked="@(Model.NotReusableFS)" x-init="notReusableFS='@Model.NotReusableFS.ToString().ToLower()'">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2" x-model="notReusableFS" checked="@(Model.NotReusableFS)" x-init="notReusableFS='@Model.NotReusableFS.ToString().ToLower()'">
                     <label class="form-check-label" for="inlineCheckbox2">No</label>
                 </div>
                 <button type="button" class="btn btn-primary w-100 mt-5" x-on:click="search()">Search</button>

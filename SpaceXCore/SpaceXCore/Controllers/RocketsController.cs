@@ -23,12 +23,12 @@ namespace SpaceXCore.Controllers
             var allRockets = responseRockets.Select(rocket => new RocketModel(rocket)).ToList();
 
 
-            var listedRockets = allRockets.Where(
-                rocket => (name == null || rocket.Name == name) &&
-                (costPerLaunch == null || rocket.Cost == costPerLaunch) &&
-                (height == null || rocket.Height == height) &&
-                (rocket.ReusableFS == reusableFS ||
-                rocket.ReusableFS == !notReusableFS || reusableFS == null && notReusableFS == null)).ToList();
+            var listedRockets = allRockets
+                .Where(rocket => name == null || rocket.Name == name)
+                .Where(rocket => costPerLaunch == null || rocket.Cost == costPerLaunch)
+                .Where(rocket => height == null || rocket.Height == height)
+                .Where(rocket => reusableFS == rocket.ReusableFS ||!notReusableFS == rocket.ReusableFS ||
+                reusableFS == null && notReusableFS == null).ToList();
 
             var model = new RocketsViewModel();
 

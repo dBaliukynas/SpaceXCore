@@ -9,7 +9,8 @@ namespace SpaceXCore.Controllers
     public class LaunchesController : Controller
     {
         [Route("Launches")]
-        public async Task<IActionResult> Index([FromQuery] string name, [FromQuery(Name = "rocket-name")] string rocketName)
+        public async Task<IActionResult> Index([FromQuery] string name, [FromQuery(Name = "rocket-name")] string rocketName,
+            [FromQuery()] bool? succeeded, [FromQuery(Name = "not-succeeded")] bool? notSucceeded)
         {
             SpaceXAPIClient client = new SpaceXAPIClient(new HttpClient());
 
@@ -23,9 +24,11 @@ namespace SpaceXCore.Controllers
             Dictionary<string, string> rocketIdToNameMapping = rockets.ToDictionary(rocket => rocket.Id, rocket => rocket.Name);
 
 
-            var listedLaunches = allLaunches.Where(
-                launch => (name == null || launch.Name == name) &&
-                (rocketName == null || rocketName == rocketIdToNameMapping[launch.RocketId])).ToList();
+            var listedLaunches = allLaunches
+                .Where(launch => name == null || launch.Name == name)
+                .Where(launch => rocketName == null || rocketName == rocketIdToNameMapping[launch.RocketId])
+                .Where(launch => succeeded == launch.Success && launch.Success != null || notSucceeded == !launch.Success && launch.Success != null ||
+                                 succeeded == null && notSucceeded == null).ToList();
 
             var model = new LaunchesViewModel();
 
@@ -34,6 +37,8 @@ namespace SpaceXCore.Controllers
             model.Rockets = rockets;
             model.Name = name;
             model.RocketName = rocketName;
+            model.Succeeded = succeeded;
+            model.NotSucceeded = notSucceeded;
 
             return View("Launches", model);
         }

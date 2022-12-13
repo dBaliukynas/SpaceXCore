@@ -7,5 +7,7 @@
         public IEnumerable<RocketModel> Rockets { get; set; }
         public string Name { get; set; }
         public string RocketName { get; set; }
+        public bool? Succeeded { get; set; }
+        public bool? NotSucceeded { get; set; }
     }
 }

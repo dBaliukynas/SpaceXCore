@@ -41,7 +41,7 @@ namespace SpaceXAPI.UnitTests
             return handlerMock;
         }
 
-        public void verifySendAsyncCalledOnce(Mock<HttpMessageHandler> handlerMock, string requestUri)
+        public void VerifySendAsyncCalledOnce(Mock<HttpMessageHandler> handlerMock, string requestUri)
         {
             handlerMock.Protected().Verify("SendAsync", Times.Once(),
             ItExpr.Is<HttpRequestMessage>(message => message.RequestUri == new Uri(requestUri)),
@@ -61,7 +61,7 @@ namespace SpaceXAPI.UnitTests
 
             launchEntityList.Should().BeEquivalentTo(launchEntityListFixture);
 
-            verifySendAsyncCalledOnce(handlerMock, requestUri);
+            VerifySendAsyncCalledOnce(handlerMock, requestUri);
 
         }
 
@@ -76,7 +76,7 @@ namespace SpaceXAPI.UnitTests
 
             launchEntity.Should().BeEquivalentTo(launchEntityFixture);
 
-            verifySendAsyncCalledOnce(handlerMock, requestUri);
+            VerifySendAsyncCalledOnce(handlerMock, requestUri);
         }
 
         [Fact]
@@ -90,7 +90,7 @@ namespace SpaceXAPI.UnitTests
 
             launchEntity.Should().BeEquivalentTo(launchEntityFixture);
 
-            verifySendAsyncCalledOnce(handlerMock, requestUri);
+            VerifySendAsyncCalledOnce(handlerMock, requestUri);
         }
 
         [Fact]
@@ -104,7 +104,7 @@ namespace SpaceXAPI.UnitTests
 
             rocketEntityList.Should().BeEquivalentTo(rocketEntityListFixture);
 
-            verifySendAsyncCalledOnce(handlerMock, requestUri);
+            VerifySendAsyncCalledOnce(handlerMock, requestUri);
         }
 
         [Fact]
@@ -118,7 +118,7 @@ namespace SpaceXAPI.UnitTests
 
             rocketEntity.Should().BeEquivalentTo(rocketEntityFixture);
 
-            verifySendAsyncCalledOnce(handlerMock, requestUri);
+            VerifySendAsyncCalledOnce(handlerMock, requestUri);
         }
 
     }

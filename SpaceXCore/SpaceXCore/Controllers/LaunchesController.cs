@@ -24,7 +24,7 @@ namespace SpaceXCore.Controllers
             Dictionary<string, string> rocketIdToNameMapping = rockets.ToDictionary(rocket => rocket.Id, rocket => rocket.Name);
 
 
-            var listedLaunches = allLaunches
+        var listedLaunches = allLaunches
                 .Where(launch => name == null || launch.Name == name)
                 .Where(launch => rocketName == null || rocketName == rocketIdToNameMapping[launch.RocketId])
                 .Where(launch => succeeded == launch.Success && launch.Success != null || notSucceeded == !launch.Success && launch.Success != null ||

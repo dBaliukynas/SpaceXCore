@@ -17,10 +17,16 @@ namespace SpaceXAPI
             client = httpClient;
         }
 
+        public SpaceXAPIClient(object @object)
+        {
+            this.@object = @object;
+        }
+
         private JsonSerializerOptions serializerOptions = new JsonSerializerOptions
         {
             PropertyNameCaseInsensitive = true,
         };
+        private object @object;
 
         public async Task<List<LaunchEntity>> GetLaunches()
         {

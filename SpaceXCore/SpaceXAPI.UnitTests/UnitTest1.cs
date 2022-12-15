@@ -56,7 +56,7 @@ namespace SpaceXAPI.UnitTests
             var requestUri = "https://api.spacexdata.com/v5/launches";
             var handlerMock = MockHttpClient(jsonLaunchEntityList, requestUri);
 
-            SpaceXAPIClient client = new SpaceXAPIClient(new HttpClient(handlerMock.Object));
+            ISpaceXAPIClient client = new SpaceXAPIClient(new HttpClient(handlerMock.Object));
 
             var launchEntityList = await client.GetLaunches();
 
@@ -71,7 +71,7 @@ namespace SpaceXAPI.UnitTests
         {
             var requestUri = $"https://api.spacexdata.com/v5/launches/{launchEntityFixture.Id}";
             var handlerMock = MockHttpClient(jsonLaunchEntity, requestUri);
-            SpaceXAPIClient client = new SpaceXAPIClient(new HttpClient(handlerMock.Object));
+            ISpaceXAPIClient client = new SpaceXAPIClient(new HttpClient(handlerMock.Object));
 
             var launchEntity = await client.GetLaunch(launchEntityFixture.Id);
 
@@ -85,7 +85,7 @@ namespace SpaceXAPI.UnitTests
         {
             var requestUri = "https://api.spacexdata.com/v5/launches/latest";
             var handlerMock = MockHttpClient(jsonLaunchEntity, requestUri);
-            SpaceXAPIClient client = new SpaceXAPIClient(new HttpClient(handlerMock.Object));
+            ISpaceXAPIClient client = new SpaceXAPIClient(new HttpClient(handlerMock.Object));
 
             var launchEntity = await client.GetLatestLaunch();
 
@@ -99,7 +99,7 @@ namespace SpaceXAPI.UnitTests
         {
             var requestUri = "https://api.spacexdata.com/v4/rockets";
             var handlerMock = MockHttpClient(jsonRocketEntityList, requestUri);
-            SpaceXAPIClient client = new SpaceXAPIClient(new HttpClient(handlerMock.Object));
+            ISpaceXAPIClient client = new SpaceXAPIClient(new HttpClient(handlerMock.Object));
 
             var rocketEntityList = await client.GetRockets();
 
@@ -113,7 +113,7 @@ namespace SpaceXAPI.UnitTests
         {
             var requestUri = $"https://api.spacexdata.com/v4/rockets/{rocketEntityFixture.Id}";
             var handlerMock = MockHttpClient(jsonRocketEntity, requestUri);
-            SpaceXAPIClient client = new SpaceXAPIClient(new HttpClient(handlerMock.Object));
+            ISpaceXAPIClient client = new SpaceXAPIClient(new HttpClient(handlerMock.Object));
 
             var rocketEntity = await client.GetRocket(rocketEntityFixture.Id);
 

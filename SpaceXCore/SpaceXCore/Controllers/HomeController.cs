@@ -9,20 +9,20 @@ namespace SpaceXCore.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly ISpaceXAPIClient _spaceXAPIClient;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, ISpaceXAPIClient spaceXAPIClient)
         {
             _logger = logger;
+            _spaceXAPIClient = spaceXAPIClient;
         }
 
 
         public async Task<IActionResult> Index()
         {
-            SpaceXAPIClient client = new SpaceXAPIClient(new HttpClient());
-
-            var responseRockets = await client.GetRockets();
-            var responseLaunches = await client.GetLaunches();
-            var responseLatestLaunch = await client.GetLatestLaunch();
+            var responseRockets = await _spaceXAPIClient.GetRockets();
+            var responseLaunches = await _spaceXAPIClient.GetLaunches();
+            var responseLatestLaunch = await _spaceXAPIClient.GetLatestLaunch();
 
             var rockets = responseRockets.Select(rocket => new RocketModel(rocket));
             var launches = responseLaunches.Select(launch => new LaunchModel(launch));

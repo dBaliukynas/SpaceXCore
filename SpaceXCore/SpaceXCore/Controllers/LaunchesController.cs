@@ -8,15 +8,22 @@ namespace SpaceXCore.Controllers
 {
     public class LaunchesController : Controller
     {
+        private readonly ISpaceXAPIClient _spaceXAPIClient;
+
+        public LaunchesController(ISpaceXAPIClient spaceXAPIClient)
+        {
+            _spaceXAPIClient = spaceXAPIClient;
+        }
+
         [Route("Launches")]
         public async Task<IActionResult> Index([FromQuery] string name, [FromQuery(Name = "rocket-name")] string rocketName,
             [FromQuery()] bool? succeeded, [FromQuery(Name = "not-succeeded")] bool? notSucceeded)
         {
-            SpaceXAPIClient client = new SpaceXAPIClient(new HttpClient());
+         
 
            
-            var responseLaunches = await client.GetLaunches();
-            var responseRockets = await client.GetRockets();
+            var responseLaunches = await _spaceXAPIClient.GetLaunches();
+            var responseRockets = await _spaceXAPIClient.GetRockets();
 
             var allLaunches = responseLaunches.Select(launch => new LaunchModel(launch));
             var rockets = responseRockets.Select(rocket => new RocketModel(rocket)).ToList();

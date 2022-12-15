@@ -11,14 +11,20 @@ namespace SpaceXCore.Controllers
 {
     public class RocketsController : Controller
     {
+        private readonly ISpaceXAPIClient _spaceXAPIClient;
+
+        public RocketsController(ISpaceXAPIClient spaceXAPIClient)
+        {
+            _spaceXAPIClient = spaceXAPIClient;
+        }
+
         [Route("Rockets")]
         public async Task<IActionResult> Index([FromQuery] string name, [FromQuery] double? height,
             [FromQuery(Name = "cost-per-launch")] long? costPerLaunch, [FromQuery(Name = "reusable-fs")] bool? reusableFS,
             [FromQuery(Name = "not-reusable-fs")] bool? notReusableFS)
         {
-            SpaceXAPIClient client = new SpaceXAPIClient(new HttpClient());
 
-            var responseRockets = await client.GetRockets();
+            var responseRockets = await _spaceXAPIClient.GetRockets();
 
             var allRockets = responseRockets.Select(rocket => new RocketModel(rocket)).ToList();
 

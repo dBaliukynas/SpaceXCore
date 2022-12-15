@@ -7,12 +7,17 @@ namespace SpaceXCore.Controllers
 {
     public class RocketController : Controller
     {
+        private readonly ISpaceXAPIClient _spaceXAPIClient;
+
+        public RocketController(ISpaceXAPIClient spaceXAPIClient)
+        {
+            _spaceXAPIClient = spaceXAPIClient;
+        }
+
         [Route("Rocket/{id}")]
         public async Task<IActionResult> Index(string id)
         {
-            SpaceXAPIClient client = new SpaceXAPIClient(new HttpClient());
-
-            var responseRocket = await client.GetRocket(id);
+            var responseRocket = await _spaceXAPIClient.GetRocket(id);
             var rocket = new RocketModel(responseRocket);
 
             var model = new RocketViewModel();

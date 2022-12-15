@@ -1,3 +1,5 @@
+using SpaceXAPI;
+
 namespace SpaceXCore
 {
     public class Program
@@ -8,6 +10,8 @@ namespace SpaceXCore
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddHttpClient();
+            builder.Services.AddScoped<ISpaceXAPIClient, SpaceXAPIClient>();
 
             var app = builder.Build();
 
@@ -30,7 +34,6 @@ namespace SpaceXCore
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
  
-
             app.Run();
         }
     }

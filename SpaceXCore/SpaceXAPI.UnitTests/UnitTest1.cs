@@ -6,13 +6,12 @@ using FluentAssertions;
 using Moq;
 using Moq.Protected;
 using System.Threading;
+using System.Net.Http.Json;
 
 namespace SpaceXAPI.UnitTests
 {
     public class SpaceXAPIClientTests
     {
-        Fixture fixture = new Fixture();
-
         static LaunchEntity launchEntityFixture = new Fixture().Create<LaunchEntity>();
         static string jsonLaunchEntity = JsonSerializer.Serialize(launchEntityFixture);
 
